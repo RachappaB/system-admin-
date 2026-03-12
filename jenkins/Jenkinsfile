@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Build Image') {
+            steps {
+                sh 'docker build -t node-ci-demo .'
+            }
+        }
+
+        stage('Stop Old Container') {
+            steps {
+                sh 'docker rm -f nodeapp || true'
+            }
+        }
+
+        stage('Deploy New Container') {
+            steps {
+                sh 'docker run -d -p 3000:3000 --name nodeapp node-ci-demo'
+            }
+        }
+
+    }
+}

@@ -1,10 +1,12 @@
-const express = require("express")
-const app = express()
+const express = require("express");
+const app = express();
+
+const VERSION = "v1";
 
 app.get("/", (req,res)=>{
-  res.send("CI/CD Pipeline Working")
-})
+    res.send("CI/CD Demo Version: " + VERSION);
+});
 
-app.listen(3000, ()=>{
-  console.log("Server running on port 3000")
-})
+app.listen(3000,()=>{
+    console.log("Server running on port 3000");
+});
