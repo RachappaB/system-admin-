@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 
-const VERSION = "v1";
+const VERSION = "v3";
 
 app.get("/", (req,res)=>{
     res.send("CI/CD Demo Version: " + VERSION);
