@@ -3,9 +3,17 @@ pipeline {
 
     stages {
 
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/RachappaB/system-admin-.git'
+            }
+        }
+
         stage('Build Image') {
             steps {
-                sh 'docker build -t node-ci-demo .'
+                dir('jenkins') {
+                    sh 'docker build -t node-ci-demo .'
+                }
             }
         }
 
@@ -17,7 +25,9 @@ pipeline {
 
         stage('Deploy New Container') {
             steps {
-                sh 'docker run -d -p 3000:3000 --name nodeapp node-ci-demo'
+                dir('jenkins') {
+                    sh 'docker run -d -p 3000:3000 --name nodeapp node-ci-demo'
+                }
             }
         }
 
